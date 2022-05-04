@@ -1,56 +1,38 @@
-import Image from "next/image";
-import { useState } from "react";
-import { Select } from "../Select/Select";
-import styles from "./styles.module.scss";
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { Select } from '../Select/Select';
+import styles from './styles.module.scss';
 
-const lines = [
-  {
-    code: "A580",
-    lineName: "Habitacional Turu - Cohama",
-    timeUntilArrival: "Agora",
-  },
-  {
-    code: "A580",
-    lineName: "Habitacional Turu - Cohama",
-    timeUntilArrival: "5 Minutos",
-  },
-  {
-    code: "A580",
-    lineName: "Habitacional Turu - Cohama",
-    timeUntilArrival: "5 Minutos",
-  },
-  {
-    code: "A580",
-    lineName: "Habitacional Turu - Cohama",
-    timeUntilArrival: "5 Minutos",
-  },
-];
-
-const options = [
-  { value: "1", label: "1 - Parada Shopping Tropical" },
-  { value: "2", label: "2 - Parada Multiempresarial" },
-];
+import BusStopDownload from '../../services/BusStopDownload';
+import StopListDownload from '../../services/StopListDownload';
+import DataContext from '../../context/DataContext';
 
 export function BusLineSection() {
-  const [selectedValue, setSelectedValue] = useState("1");
+  const { dataContext } = DataContext();
+  const { selectedStop, setSelectedStop } = dataContext;
+  const { pickerOptions } = BusStopDownload();
+  const { busList } = StopListDownload();
 
   return (
     <section className={styles.container}>
       <form className={styles.formWrapper}>
-        <Select
-          value={options.find((o) => o.value === selectedValue)}
-          options={options}
-          onChange={(value: { label: string; value: string }) =>
-            setSelectedValue(value.value)
-          }
-        />
+        {pickerOptions ? (
+          <Select
+            value={selectedStop}
+            options={pickerOptions}
+            placeholder='Selecione uma parada'
+            onChange={(value: { label: string; value: string }) => setSelectedStop(value)}
+          />
+        ) : null}
 
         <button className={styles.button}>Pesquisar</button>
       </form>
-
+      {/* 
       <section className={styles.contentWrapper}>
-        {selectedValue === "1" &&
-          lines.map((l, i) => (
+        {selectedStop &&
+          selectedStop.value > 1 &&
+          busList &&
+          busList.map((l, i) => (
             <div className={styles.line} key={i}>
               <p>{l.code}</p>
               <p>{l.lineName}</p>
@@ -58,21 +40,13 @@ export function BusLineSection() {
             </div>
           ))}
 
-        {selectedValue === "2" && (
+        {selectedStop && selectedStop.value === 1 && (
           <div className={styles.error}>
-            <Image
-              src="/sad.svg"
-              alt="Um emoji triste"
-              width={70}
-              height={70}
-            />
-            <p>
-              Poxa! Não tem ônibus previstos para essa parada. Que tal tentar
-              mais tarde?
-            </p>
+            <Image src='/sad.svg' alt='Um emoji triste' width={70} height={70} />
+            <p>Poxa! Não tem ônibus previstos para essa parada. Que tal tentar mais tarde?</p>
           </div>
         )}
-      </section>
+      </section> */}
     </section>
   );
 }
