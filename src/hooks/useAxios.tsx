@@ -47,7 +47,7 @@ const useAxios = ({ url, method, params, body = null, headers = null }: axiosReq
         setLoading(false);
       }
     }
-  }, []);
+  }, [body, headers, method, params, setDataResponse, setErro, setLoading, url]);
 
   useEffect(() => {
     fetchData();
