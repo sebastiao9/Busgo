@@ -12,10 +12,7 @@ const BusStopDownload = () => {
     url: `busstop`,
   };
 
-  const { axiosRequest } = useAxios({
-    url: `busstop`,
-    method: `get`,
-  });
+  const { axiosRequest } = useAxios(dataPicker);
 
   const { dataResponse, loading, erro } = axiosRequest;
 
