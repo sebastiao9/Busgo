@@ -18,7 +18,7 @@ const BusStopDownload = () => {
 
   const { dataResponse, loading, erro } = axiosRequest;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     fetchData(dataPicker);
   }, []);
 
@@ -30,7 +30,7 @@ const BusStopDownload = () => {
             ? null
             : setPickerOptions((prev) => [
                 ...prev,
-                { label: item.name, value: item.id, lat: item.latitude, long: item.longitude },
+                { label: item.name, value: item.id, lat: item.latitude, lng: item.longitude },
               ]);
         });
     } catch (error) {

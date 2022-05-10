@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "@react-google-maps/api": "^2.10.2",
     "axios": "^0.27.2",
     "jotai": "^1.6.5",
@@ -20,6 +23,7 @@
     "sass": "^1.49.11"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.48.8",
     "@types/node": "^17.0.23",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",

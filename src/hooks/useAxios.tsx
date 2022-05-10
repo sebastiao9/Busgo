@@ -43,7 +43,7 @@ const useAxios = () => {
           console.log('Error', error.message);
         }
       } finally {
-        if (axiosResponse.status === 200) {
+        if (axiosResponse && axiosResponse.status === 200) {
           setDataResponse(axiosResponse.data);
           setLoading(false);
         }

@@ -11,9 +11,15 @@ export function BusLineSection() {
   const { pickerOptions } = BusStopDownload();
   const { busList } = BusListDownload();
 
-  const busList2 = [
-    { code: '204', lineName: 'Alemanha', timeUntilArrival: 'Agora' },
-    { code: '057', lineName: 'Vinhais Ipase', timeUntilArrival: 'Agora' },
+  const busList1 = [
+    { code: '056', lineName: 'Santa Rosa', timeUntilArrival: 'Agora' },
+    { code: '503', lineName: 'Cidade Verde', timeUntilArrival: '4 minutos' },
+  ];
+
+  const busList4 = [
+    { code: '57', lineName: 'Vinhais São Francisco', timeUntilArrival: 'Agora' },
+    { code: '057', lineName: 'Bequimão São Francisco', timeUntilArrival: '5 minutos' },
+    { code: '056', lineName: 'Santa Rosa', timeUntilArrival: '10 Minutos' },
   ];
 
   return (
@@ -32,8 +38,9 @@ export function BusLineSection() {
       </form>
 
       <section className={styles.contentWrapper}>
-        {busList2 &&
-          busList2.map((l, i) => (
+        {selectedStop &&
+          selectedStop.value === 1 &&
+          busList1.map((l, i) => (
             <div className={styles.line} key={i}>
               <p>{l.code}</p>
               <p>{l.lineName}</p>
@@ -41,12 +48,23 @@ export function BusLineSection() {
             </div>
           ))}
 
-        {/* {selectedStop && !selectedStop.value && (
-          <div className={styles.error}>
-            <Image src='/sad.svg' alt='Um emoji triste' width={70} height={70} />
-            <p>Poxa! Não tem ônibus previstos para essa parada. Que tal tentar mais tarde?</p>
-          </div>
-        )} */}
+        {selectedStop &&
+          selectedStop.value === 4 &&
+          busList4.map((l, i) => (
+            <div className={styles.line} key={i}>
+              <p>{l.code}</p>
+              <p>{l.lineName}</p>
+              <span>{l.timeUntilArrival}</span>
+            </div>
+          ))}
+
+        {(selectedStop && selectedStop.value === 2) ||
+          (selectedStop && selectedStop.value === 3 && (
+            <div className={styles.error}>
+              <Image src='/sad.svg' alt='Um emoji triste' width={70} height={70} />
+              <p>Poxa! Não tem ônibus previstos para essa parada. Que tal tentar mais tarde?</p>
+            </div>
+          ))}
       </section>
     </section>
   );
