@@ -30,7 +30,7 @@ export function BusLineSection() {
             value={selectedStop}
             options={pickerOptions}
             placeholder='Selecione uma parada'
-            onChange={(value: { label: string; value: string }) => setSelectedStop(value)}
+            onChange={(value: { label: string; value: number }) => setSelectedStop(value)}
           />
         ) : null}
 
@@ -39,7 +39,7 @@ export function BusLineSection() {
 
       <section className={styles.contentWrapper}>
         {selectedStop &&
-          selectedStop.value === 1 &&
+          selectedStop?.value === 1 &&
           busList1.map((l, i) => (
             <div className={styles.line} key={i}>
               <p>{l.code}</p>

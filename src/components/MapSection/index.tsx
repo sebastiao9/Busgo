@@ -22,7 +22,7 @@ export function MapSection() {
   const { selectedStop } = dataContext;
 
   useEffect(() => {
-    selectedStop && setPosition({ lat: selectedStop.lat, lng: selectedStop?.lng });
+    selectedStop && setPosition({ lat: selectedStop?.lat, lng: selectedStop?.lng });
   }, [selectedStop]);
 
   let map: google.maps.Map;
