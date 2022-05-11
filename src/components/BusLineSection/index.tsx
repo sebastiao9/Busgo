@@ -30,7 +30,7 @@ export function BusLineSection() {
             value={selectedStop}
             options={pickerOptions}
             placeholder='Selecione uma parada'
-            onChange={(value: { label: string; value: number }) => setSelectedStop(value)}
+            onChange={(value: { label: string; value: number,lat: number, lng: number }) => setSelectedStop(value)}
           />
         ) : null}
 

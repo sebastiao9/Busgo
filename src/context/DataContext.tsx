@@ -2,7 +2,7 @@ import { atom, useAtom } from 'jotai';
 
 const busStopList = atom([]);
 const busStopOptions = atom([]);
-const busStopSelelected = atom({label: '', value:0});
+const busStopSelelected = atom({label: '', value:0, lat: 0, lng:0});
 const pickerStatus = atom(false);
 
 const DataContext = () => {
