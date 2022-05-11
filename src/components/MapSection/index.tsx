@@ -12,7 +12,7 @@ const geoPosition = atom({
 });
 
 const loader = new Loader({
-  apiKey: 'AIzaSyAPoh23erVy-pBLIc8IT1Wx2QV0zBn2iYA',
+  apiKey: process.env.REACT_APP_API_KEY,
   version: 'weekly',
   libraries: ['places'],
 });
