@@ -6,13 +6,13 @@ import styles from "../styles/Home.module.scss";
 
 export default function Home() {
   return (
-    <>
+    <div>
       <Header />
 
       <main className={styles.wrapper}>
         <BusLineSection />
         <MapSection />
       </main>
-    </>
-  );
+    </div>
+  )
 }
