@@ -12,8 +12,7 @@ const geoPosition = atom({
 });
 
 const loader = new Loader({
-  apiKey: process.env.REACT_APP_API_KEY,
-  version: 'weekly',
+  apiKey: process.env.apikey,
   libraries: ['places'],
 });
 
