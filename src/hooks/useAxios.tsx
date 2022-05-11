@@ -1,11 +1,10 @@
-import { useCallback, useEffect } from 'react';
-import axios, { AxiosRequestConfig } from 'axios';
+import { useCallback } from 'react';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { atom, useAtom } from 'jotai';
 
-let axiosResponse: any;
+let axiosResponse: AxiosResponse;
 
 interface axiosRequestTypes extends AxiosRequestConfig {
-  delay?: number;
   body?: any;
   headers?: any;
 }
