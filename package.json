@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@googlemaps/js-api-loader": "^1.14.3",
     "@react-google-maps/api": "^2.10.2",
     "axios": "^0.27.2",
     "jotai": "^1.6.5",

@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import styles from './styles.module.scss';
-import { Loader } from '@googlemaps/js-api-loader';
-import { faHand } from '@fortawesome/free-solid-svg-icons';
-import { useEffect } from 'react';
-import { atom, useAtom } from 'jotai';
-import DataContext from '../../context/DataContext';
+import Image from "next/image";
+import styles from "./styles.module.scss";
+import { Loader } from "@googlemaps/js-api-loader";
+import { faHand } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
+import { atom, useAtom } from "jotai";
+import DataContext from "../../context/DataContext";
 
 const geoPosition = atom({
   lat: -2.526755249734547,
@@ -12,8 +12,8 @@ const geoPosition = atom({
 });
 
 const loader = new Loader({
-  apiKey: process.env.apikey,
-  libraries: ['places'],
+  apiKey: process.env.APIKEY,
+  libraries: ["places"],
 });
 
 export function MapSection() {
@@ -23,6 +23,7 @@ export function MapSection() {
 
   useEffect(() => {
     selectedStop && setPosition({ lat: selectedStop?.lat, lng: selectedStop?.lng });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStop]);
 
   let map: google.maps.Map;
@@ -32,9 +33,16 @@ export function MapSection() {
       .load()
       // eslint-disable-next-line react-hooks/exhaustive-deps
       .then(
-        (google) =>
+        (google: {
+          maps: {
+            Map: new (
+              arg0: HTMLElement,
+              arg1: { center: { lat: number; lng: number }; zoom: number }
+            ) => google.maps.Map;
+          };
+        }) =>
           // eslint-disable-next-line react-hooks/exhaustive-deps
-          (map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
+          (map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
             center: {
               ...position,
             },
@@ -42,13 +50,13 @@ export function MapSection() {
           }))
       )
       .then(
-        (map) =>
+        (map: any) =>
           new google.maps.Marker({
             position: { ...position },
             map,
 
             animation: google.maps.Animation.DROP,
-            title: 'Teste',
+            title: "Teste",
           })
       )
       .catch((e) => {

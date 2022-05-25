@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import { Select } from '../Select/Select';
-import styles from './styles.module.scss';
-import BusStopDownload from '../../data/BusStopDownload';
-import BusListDownload from '../../data/BusListDownload';
-import DataContext from '../../context/DataContext';
+import Image from "next/image";
+import { Select } from "../Select/Select";
+import styles from "./styles.module.scss";
+import BusStopDownload from "../../data/BusStopDownload";
+import BusListDownload from "../../data/BusListDownload";
+import DataContext from "../../context/DataContext";
 
 export function BusLineSection() {
   const { dataContext } = DataContext();
@@ -12,14 +12,8 @@ export function BusLineSection() {
   const { busList } = BusListDownload();
 
   const busList1 = [
-    { code: '056', lineName: 'Santa Rosa', timeUntilArrival: 'Agora' },
-    { code: '503', lineName: 'Cidade Verde', timeUntilArrival: '4 minutos' },
-  ];
-
-  const busList4 = [
-    { code: '57', lineName: 'Vinhais São Francisco', timeUntilArrival: 'Agora' },
-    { code: '057', lineName: 'Bequimão São Francisco', timeUntilArrival: '5 minutos' },
-    { code: '056', lineName: 'Santa Rosa', timeUntilArrival: '10 Minutos' },
+    { code: "056", lineName: "Santa Rosa", timeUntilArrival: "Agora" },
+    { code: "503", lineName: "Cidade Verde", timeUntilArrival: "4 minutos" },
   ];
 
   return (
@@ -30,7 +24,7 @@ export function BusLineSection() {
             value={selectedStop}
             options={pickerOptions}
             placeholder='Selecione uma parada'
-            onChange={(value: { label: string; value: number,lat: number, lng: number }) => setSelectedStop(value)}
+            onChange={(value: { label: string; value: number; lat: number; lng: number }) => setSelectedStop(value)}
           />
         ) : null}
 
@@ -41,16 +35,6 @@ export function BusLineSection() {
         {selectedStop &&
           selectedStop?.value === 1 &&
           busList1.map((l, i) => (
-            <div className={styles.line} key={i}>
-              <p>{l.code}</p>
-              <p>{l.lineName}</p>
-              <span>{l.timeUntilArrival}</span>
-            </div>
-          ))}
-
-        {selectedStop &&
-          selectedStop.value === 4 &&
-          busList4.map((l, i) => (
             <div className={styles.line} key={i}>
               <p>{l.code}</p>
               <p>{l.lineName}</p>

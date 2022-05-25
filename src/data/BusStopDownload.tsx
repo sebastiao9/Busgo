@@ -1,9 +1,9 @@
-import { useEffect, useLayoutEffect } from 'react';
-import useAxios from '../hooks/useAxios';
-import { axiosRequestTypes } from '../types/axiosTypes';
-import DataContext from '../context/DataContext';
-import { atom, useAtom } from 'jotai';
-import BusListDownload from './BusListDownload';
+import { useEffect, useLayoutEffect } from "react";
+import useAxios from "../hooks/useAxios";
+import { axiosRequestTypes } from "../types/axiosTypes";
+import DataContext from "../context/DataContext";
+import { atom, useAtom } from "jotai";
+import BusListDownload from "./BusListDownload";
 
 const BusStopDownload = () => {
   const { dataContext } = DataContext();
@@ -12,7 +12,7 @@ const BusStopDownload = () => {
   const { fetchData } = axiosRequest;
 
   const dataPicker: axiosRequestTypes = {
-    method: 'get',
+    method: "get",
     url: `busstop`,
   };
 
