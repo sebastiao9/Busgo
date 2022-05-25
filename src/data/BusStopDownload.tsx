@@ -19,7 +19,7 @@ const BusStopDownload = () => {
   const { dataResponse, loading, erro } = axiosRequest;
 
   useEffect(() => {
-    fetchData(dataPicker);
+    pickerFilled === false && fetchData(dataPicker);
   }, []);
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 import BusStopDownload from "../../data/BusStopDownload";
 import BusListDownload from "../../data/BusListDownload";
 import DataContext from "../../context/DataContext";
+import { useEffect, useLayoutEffect } from "react";
 
 export function BusLineSection() {
   const { dataContext } = DataContext();
@@ -15,6 +16,21 @@ export function BusLineSection() {
     { code: "056", lineName: "Santa Rosa", timeUntilArrival: "Agora" },
     { code: "503", lineName: "Cidade Verde", timeUntilArrival: "4 minutos" },
   ];
+
+  useEffect(() => {}, []);
+
+  const ListBusStop = () => {
+    if (busList.length > 0) {
+      return busList.map((l, i) => (
+        <div className={styles.line} key={i}>
+          <p>{l.lineName}</p>
+          <span>{l.distance}</span>
+        </div>
+      ));
+    } else {
+      return <p>Nenhuma informação foi encontrada</p>;
+    }
+  };
 
   return (
     <section className={styles.container}>
@@ -31,25 +47,7 @@ export function BusLineSection() {
         <button className={styles.button}>Pesquisar</button>
       </form>
 
-      <section className={styles.contentWrapper}>
-        {selectedStop &&
-          selectedStop?.value === 1 &&
-          busList1.map((l, i) => (
-            <div className={styles.line} key={i}>
-              <p>{l.code}</p>
-              <p>{l.lineName}</p>
-              <span>{l.timeUntilArrival}</span>
-            </div>
-          ))}
-
-        {(selectedStop && selectedStop.value === 2) ||
-          (selectedStop && selectedStop.value === 3 && (
-            <div className={styles.error}>
-              <Image src='/sad.svg' alt='Um emoji triste' width={70} height={70} />
-              <p>Poxa! Não tem ônibus previstos para essa parada. Que tal tentar mais tarde?</p>
-            </div>
-          ))}
-      </section>
+      <section className={styles.contentWrapper}>{busList.length > 0 ? <ListBusStop /> : null}</section>
     </section>
   );
 }
