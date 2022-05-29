@@ -1,18 +1,16 @@
-import Image from "next/image";
 import { BusLineSection } from "../components/BusLineSection";
 import { Header } from "../components/Header";
 import { MapSection } from "../components/MapSection";
-import styles from "../styles/Home.module.scss";
+import { Grid } from "@chakra-ui/react";
 
 export default function Home() {
   return (
     <div>
       <Header />
-
-      <main className={styles.wrapper}>
+      <Grid gap='5vw' autoFlow='column' justifyContent='center'>
         <BusLineSection />
         <MapSection />
-      </main>
+      </Grid>
     </div>
-  )
+  );
 }

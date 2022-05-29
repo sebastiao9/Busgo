@@ -1,16 +1,32 @@
+import { BellIcon } from "@chakra-ui/icons";
+import { Avatar, Flex, Grid, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import Image from "next/image";
-
-import styles from './styles.module.scss'
 
 export function Header() {
   return (
-    <header className={styles.header}>
-      <Image
-        src="/logo.svg"
-        alt="representação de um onibus seguido da palavra BUSGO"
-        width={225}
-        height={59}
-      />
-    </header>
+    <Flex
+      w='100vw'
+      h='17vh'
+      flexFlow='row'
+      alignItems='center'
+      alignSelf='center'
+      padding='0 15vh'
+      mb='3vh'
+      justifyContent='space-between'>
+      <Image src='/logo.svg' alt='representação de um onibus seguido da palavra BUSGO' width={225} height={59} />
+      <Grid autoFlow='column' alignItems='center' gap='1vh'>
+        <WrapItem>
+          <Text>Ada Lovelace</Text>
+        </WrapItem>
+        <WrapItem>
+          <Avatar
+            name='Ada Lovelace'
+            src='https://s2.glbimg.com/paF5KTEVGzMU-ZcZa2mjYicNDjM=/e.glbimg.com/og/ed/f/original/2015/03/09/ada.jpg'
+            size='lg'
+            showBorder={false}
+          />
+        </WrapItem>
+      </Grid>
+    </Flex>
   );
 }

@@ -25,6 +25,7 @@ const BusStopDownload = () => {
   useEffect(() => {
     try {
       pickerFilled === false &&
+        Array.isArray(dataResponse) &&
         dataResponse.map((item) => {
           pickerOptions.some((value) => value.value === item.id)
             ? null

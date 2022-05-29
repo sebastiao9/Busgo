@@ -35,9 +35,6 @@ const BusListDownload = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tempList]);
-  useEffect(() => {
-    console.log(busList);
-  }, [busList]);
 
   return {
     busList,

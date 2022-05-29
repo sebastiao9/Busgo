@@ -5,11 +5,9 @@ import { faHand } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { atom, useAtom } from "jotai";
 import DataContext from "../../context/DataContext";
+import { Grid } from "@chakra-ui/react";
 
-const geoPosition = atom({
-  lat: -2.526755249734547,
-  lng: -44.247313993234364,
-});
+const geoPosition = atom({ lat: 0, lng: 0 });
 
 const loader = new Loader({
   apiKey: process.env.APIKEY,
@@ -26,9 +24,13 @@ export function MapSection() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStop]);
 
-  let map: google.maps.Map;
+  useEffect(() => {
+    setPosition({ lat: -2.526755249734547, lng: -44.247313993234364 });
+  }, [setPosition]);
 
   useEffect(() => {
+    let map: google.maps.Map;
+
     loader
       .load()
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,7 +58,7 @@ export function MapSection() {
             map,
 
             animation: google.maps.Animation.DROP,
-            title: "Teste",
+            title: "Hello World!",
           })
       )
       .catch((e) => {
@@ -64,5 +66,5 @@ export function MapSection() {
       });
   }, [position]);
 
-  return <div id='map' className={styles.container}></div>;
+  return <Grid w='40vw' id='map' />;
 }
