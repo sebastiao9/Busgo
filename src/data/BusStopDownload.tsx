@@ -7,7 +7,7 @@ import BusListDownload from "./BusListDownload";
 
 const BusStopDownload = () => {
   const { dataContext } = DataContext();
-  const { pickerOptions, setPickerOptions, selectedStop, pickerFilled, setPickerFilled } = dataContext;
+  const { pickerOptions, setPickerOptions, pickerFilled, setPickerFilled } = dataContext;
   const { axiosRequest } = useAxios();
   const { fetchData } = axiosRequest;
 
@@ -16,10 +16,10 @@ const BusStopDownload = () => {
     url: `busstop`,
   };
 
-  const { dataResponse, loading, erro } = axiosRequest;
+  const { dataResponse } = axiosRequest;
 
   useEffect(() => {
-    pickerFilled === false && fetchData(dataPicker);
+    pickerFilled !== true && fetchData(dataPicker);
   }, []);
 
   useEffect(() => {
@@ -27,9 +27,9 @@ const BusStopDownload = () => {
       pickerFilled === false &&
         Array.isArray(dataResponse) &&
         dataResponse.map((item) => {
-          pickerOptions.some((value) => value.value === item.id)
+          pickerOptions.some((value: { value: any }) => value.value === item.id)
             ? null
-            : setPickerOptions((prev) => [
+            : setPickerOptions((prev: any) => [
                 ...prev,
                 { label: item.name, value: item.id, lat: item.latitude, lng: item.longitude },
               ]);
@@ -37,7 +37,7 @@ const BusStopDownload = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      pickerOptions.length > 0 ? setPickerFilled(true) : null;
+      pickerOptions.length > 0 ? setPickerFilled(true) : setPickerFilled(false);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

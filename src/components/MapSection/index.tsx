@@ -1,16 +1,12 @@
-import Image from "next/image";
-import styles from "./styles.module.scss";
 import { Loader } from "@googlemaps/js-api-loader";
-import { faHand } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { atom, useAtom } from "jotai";
 import DataContext from "../../context/DataContext";
 import { Grid } from "@chakra-ui/react";
-
 const geoPosition = atom({ lat: 0, lng: 0 });
 
 const loader = new Loader({
-  apiKey: process.env.APIKEY,
+  apiKey: process.env.API_KEY,
   libraries: ["places"],
 });
 
@@ -20,7 +16,10 @@ export function MapSection() {
   const { selectedStop } = dataContext;
 
   useEffect(() => {
-    selectedStop && setPosition({ lat: selectedStop?.lat, lng: selectedStop?.lng });
+    Object.keys(selectedStop).length > 0
+      ? setPosition({ lat: selectedStop.lat, lng: selectedStop.lng })
+      : setPosition({ lat: -2.526755249734547, lng: -44.247313993234364 });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStop]);
 
@@ -29,8 +28,6 @@ export function MapSection() {
   }, [setPosition]);
 
   useEffect(() => {
-    let map: google.maps.Map;
-
     loader
       .load()
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,7 +49,7 @@ export function MapSection() {
           }))
       )
       .then(
-        (map: any) =>
+        (map: google.maps.Map) =>
           new google.maps.Marker({
             position: { ...position },
             map,

@@ -1,13 +1,8 @@
-import { useCallback } from 'react';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { atom, useAtom } from 'jotai';
+import { useCallback } from "react";
+import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
+import { atom, useAtom } from "jotai";
 
 let axiosResponse: AxiosResponse;
-
-interface axiosRequestTypes extends AxiosRequestConfig {
-  body?: any;
-  headers?: any;
-}
 
 const dataAtom = atom([]);
 const loadingAtom = atom({});
@@ -19,27 +14,28 @@ const useAxios = () => {
   const [erro, setErro] = useAtom(erroAtom);
 
   const fetchData = useCallback(
-    async ({ url, method, params, body = null, headers = null }: axiosRequestTypes) => {
+    async ({ url, method, params, data = null, headers = null }: AxiosRequestConfig) => {
+      setDataResponse([]);
       try {
         axiosResponse = await axios({
           url: url,
           method: method,
           params: params,
-          data: body,
+          data: data,
           headers: headers,
           baseURL: `https://bus-iot.herokuapp.com/`,
           onUploadProgress: () => {
             setLoading(true);
           },
         });
-      } catch (error: any) {
+      } catch (error) {
         if (error.response) {
           setDataResponse(undefined);
           setErro(error);
         } else if (error.request) {
           console.log(error.request);
         } else {
-          console.log('Error', error.message);
+          console.log("Error", error.message);
         }
       } finally {
         if (axiosResponse && axiosResponse.status === 200) {

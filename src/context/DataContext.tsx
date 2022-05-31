@@ -2,8 +2,9 @@ import { atom, useAtom } from "jotai";
 
 const busStopList = atom([]);
 const busStopOptions = atom<any | any[]>([]);
-const busStopSelelected = atom({ label: "", value: 0, lat: 0, lng: 0 });
-const pickerStatus = atom(false);
+const busStopSelelected = atom<any>({});
+const pickerStatus = atom<boolean>(false);
+const listStatus = atom<boolean>(false);
 const selectedValueStop = atom<number>(0);
 
 const DataContext = () => {
@@ -11,6 +12,7 @@ const DataContext = () => {
   const [pickerOptions, setPickerOptions] = useAtom(busStopOptions);
   const [busList, setBusList] = useAtom(busStopList);
   const [pickerFilled, setPickerFilled] = useAtom(pickerStatus);
+  const [listFilled, setListFilled] = useAtom(listStatus);
   const [selectedValue, setSelectedValue] = useAtom(selectedValueStop);
 
   return {
@@ -25,6 +27,8 @@ const DataContext = () => {
       setPickerFilled,
       selectedValue,
       setSelectedValue,
+      listFilled,
+      setListFilled,
     },
   };
 };

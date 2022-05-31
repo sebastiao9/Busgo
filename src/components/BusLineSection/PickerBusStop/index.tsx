@@ -6,8 +6,28 @@ import DataContext from "../../../context/DataContext";
 
 const PickerBusStop = () => {
   const { dataContext } = DataContext();
-  const { setSelectedValue } = dataContext;
+  const { setSelectedValue, selectedValue, selectedStop, setSelectedStop } = dataContext;
   const { pickerOptions } = BusStopDownload();
+
+  let result:
+    | { label: string; value: number; lat: number; lng: number }
+    | ((prev: { label: string; value: number; lat: number; lng: number }) => {
+        label: string;
+        value: number;
+        lat: number;
+        lng: number;
+      });
+
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      result = pickerOptions.find((item: { value: number }) => item.value === Number(selectedValue));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      result && setSelectedStop(result);
+    }
+  }, [selectedValue]);
 
   return (
     <>
@@ -16,8 +36,8 @@ const PickerBusStop = () => {
           placeholder='Selecione uma parada...'
           size='lx'
           h='6vh'
-          w='30vw'
-          onChange={(e: any) => {
+          minW='25vw'
+          onChange={(e: { target: { value: number | ((prev: number) => number) } }) => {
             setSelectedValue(e.target.value);
           }}>
           {pickerOptions.map(
