@@ -6,8 +6,28 @@ import DataContext from "../../../context/DataContext";
 
 const PickerBusStop = () => {
   const { dataContext } = DataContext();
-  const { setSelectedValue } = dataContext;
+  const { setSelectedValue, selectedValue, selectedStop, setSelectedStop } = dataContext;
   const { pickerOptions } = BusStopDownload();
+
+  let result:
+    | { label: string; value: number; lat: number; lng: number }
+    | ((prev: { label: string; value: number; lat: number; lng: number }) => {
+        label: string;
+        value: number;
+        lat: number;
+        lng: number;
+      });
+
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      result = pickerOptions.find((item: { value: number }) => item.value === Number(selectedValue));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      result && setSelectedStop(result);
+    }
+  }, [selectedValue]);
 
   return (
     <>
@@ -15,9 +35,9 @@ const PickerBusStop = () => {
         <Select
           placeholder='Selecione uma parada...'
           size='lx'
-          h='6vh'
-          w='30vw'
-          onChange={(e: any) => {
+          h='4vh'
+          w={{ base: "70vw", lg: "16vw" }}
+          onChange={(e: { target: { value: number | ((prev: number) => number) } }) => {
             setSelectedValue(e.target.value);
           }}>
           {pickerOptions.map(
@@ -41,7 +61,7 @@ const PickerBusStop = () => {
           )}
         </Select>
       ) : (
-        <Grid h='6vh' justifyItems='center' alignItems='center' w='30vw'>
+        <Grid h='6vh' justifyItems='center' alignItems='center' w={{ base: "80vw", lg: "20vw" }}>
           <Spinner size='xl' color='#293462' speed='0.65s' />
         </Grid>
       )}
