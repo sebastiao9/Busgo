@@ -8,9 +8,9 @@ const ButtonSearch = () => {
       borderRadius='2.5rem'
       color='whitesmoke'
       border='none'
-      h='4rem'
-      minW='10vw'
-      fontSize='1.7rem'
+      h='4vh'
+      minW='6vw'
+      fontSize='1rem'
       _hover={{ background: "#F24C4C" }}
       _focus={{ outline: "none" }}
       _active={{

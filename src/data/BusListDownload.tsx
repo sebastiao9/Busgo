@@ -36,8 +36,18 @@ const BusListDownload = () => {
   }, [dataResponse]);
 
   useEffect(() => {
+    console.log(tempList);
+  }, [tempList]);
+
+  useEffect(() => {
+    let notNullList: { [k: string]: any };
     let arrayBusList: { [x: string]: any }[];
-    arrayBusList = Object.entries(tempList).map(([k, v]) => ({ lineName: k, distance: Number(v).toFixed(2) }));
+
+    notNullList = Object.fromEntries(Object.entries(tempList).filter(([_, v]) => v != null));
+    arrayBusList = Object.entries(notNullList).map(([k, v]) => ({
+      lineName: k,
+      distance: ((Number(v).toFixed(2) * 60) / 5).toFixed(0),
+    }));
     setBusList(arrayBusList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tempList]);

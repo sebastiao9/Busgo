@@ -45,6 +45,7 @@ export function MapSection() {
             center: {
               ...position,
             },
+            disableDefaultUI: true,
             zoom: position.lat === -2.526755249734547 && position.lng === -44.247313993234364 ? 4 : 17,
           }))
       )
@@ -63,5 +64,7 @@ export function MapSection() {
       });
   }, [position]);
 
-  return <Grid w='40vw' id='map' />;
+  return (
+    <Grid w={{ base: "106vw", lg: "45vw" }} h={{ base: "30vh", lg: "70vh" }} order={{ base: "1", lg: "2" }} id='map' />
+  );
 }

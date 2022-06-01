@@ -35,8 +35,8 @@ const PickerBusStop = () => {
         <Select
           placeholder='Selecione uma parada...'
           size='lx'
-          h='6vh'
-          minW='25vw'
+          h='4vh'
+          w={{ base: "70vw", lg: "16vw" }}
           onChange={(e: { target: { value: number | ((prev: number) => number) } }) => {
             setSelectedValue(e.target.value);
           }}>
@@ -61,7 +61,7 @@ const PickerBusStop = () => {
           )}
         </Select>
       ) : (
-        <Grid h='6vh' justifyItems='center' alignItems='center' w='30vw'>
+        <Grid h='6vh' justifyItems='center' alignItems='center' w={{ base: "80vw", lg: "20vw" }}>
           <Spinner size='xl' color='#293462' speed='0.65s' />
         </Grid>
       )}

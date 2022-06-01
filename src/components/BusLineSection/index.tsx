@@ -5,15 +5,16 @@ import ListBusStop from "./ListBusStop";
 
 export function BusLineSection() {
   return (
-    <Grid h='70vh' autoFlow='row'>
+    <Grid h='70vh' autoFlow='row' background='white' padding='1.5625rem' order={{ base: "2", lg: "1" }}>
       <Grid
         gridTemplateColumns='2'
         templateColumns='80% 20%'
         gridAutoFlow='column'
-        h='12vh'
+        h='6vh'
         alignItems='center'
         justifyContent='center'
-        gap='2vw'>
+        gap='2vw'
+        w={{ base: "100vw", lg: "auto" }}>
         <PickerBusStop />
         <ButtonSearch />
       </Grid>
